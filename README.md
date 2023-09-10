@@ -21,6 +21,7 @@ services:
     environment:
       - WARP_SLEEP=2
       # - WARP_LICENSE_KEY= # optional
+      # - DO_NOT_CREATE_TUN_DEVICE=true
     cap_add:
       - NET_ADMIN
     sysctls:
@@ -28,6 +29,7 @@ services:
       - net.ipv4.conf.all.src_valid_mark=1
     volumes:
       - ./data:/var/lib/cloudflare-warp
+      # - /dev/net/tun:/dev/net/tun
 ```
 
 Try it out to see if it works:
@@ -37,6 +39,8 @@ curl --socks5 127.0.0.1:1080 https://cloudflare.com/cdn-cgi/trace
 ```
 
 If the output contains `warp=on` or `warp=plus`, the container is working properly. If the output contains `warp=off`, it means that the container failed to connect to the WARP service.
+
+If the output looks like `mknod: /dev/net/tun: Operation not permitted`, you can try uncomment line 13 and line 21.
 
 ### Configuration
 

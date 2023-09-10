@@ -4,9 +4,11 @@
 set -e
 
 # create a tun device
-mkdir -p /dev/net
-mknod /dev/net/tun c 10 200
-chmod 600 /dev/net/tun
+if [ ! -n "$DO_NOT_CREATE_TUN_DEVICE" ]; then
+    mkdir -p /dev/net
+    mknod /dev/net/tun c 10 200
+    chmod 600 /dev/net/tun
+fi
 
 # start the daemon
 warp-svc &

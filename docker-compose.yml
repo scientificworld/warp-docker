@@ -10,6 +10,7 @@ services:
     environment:
       - WARP_SLEEP=2
       # - WARP_LICENSE_KEY= # optional
+      # - DO_NOT_CREATE_TUN_DEVICE=true
     cap_add:
       - NET_ADMIN
     sysctls:
@@ -17,3 +18,4 @@ services:
       - net.ipv4.conf.all.src_valid_mark=1
     volumes:
       - ./data:/var/lib/cloudflare-warp
+      # - /dev/net/tun:/dev/net/tun
