@@ -21,7 +21,7 @@ RUN mkdir -p /root/.local/share/warp && \
 
 COPY entrypoint.sh /entrypoint.sh
 
-ENV GOST_ARGS="-L :1080"
+ENV GOST_ARGS="-L :1080 -L sni://:80 -L sni://:443"
 ENV WARP_SLEEP=2
 
 HEALTHCHECK --interval=15s --timeout=5s --start-period=30s --retries=3 \
