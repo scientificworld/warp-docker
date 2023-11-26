@@ -16,6 +16,11 @@ warp-svc &
 # sleep to wait for the daemon to start, default 2 seconds
 sleep "$WARP_SLEEP"
 
+# set custom endpoint
+if [ -n "$WARP_CUSTOM_ENDPOINT" ]; then
+    warp-cli set-custom-endpoint "$WARP_CUSTOM_ENDPOINT"
+fi
+
 # if /var/lib/cloudflare-warp/reg.json not exists, register the warp client
 if [ ! -f /var/lib/cloudflare-warp/reg.json ]; then
     warp-cli register && echo "Warp client registered!"

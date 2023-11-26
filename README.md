@@ -6,36 +6,13 @@ Run official [Cloudflare WARP](https://1.1.1.1/) client in Docker.
 
 ### Start the container
 
-To run the WARP client in Docker, just write the following content to `docker-compose.yml` and run `docker-compose up -d`.
-
-```yaml
-version: '3'
-
-services:
-  warp:
-    image: caomingjun/warp
-    container_name: warp
-    restart: always
-    ports:
-      - '1080:1080'
-    environment:
-      - WARP_SLEEP=2
-      # - WARP_LICENSE_KEY= # optional
-      # - DO_NOT_CREATE_TUN_DEVICE=true
-    cap_add:
-      - NET_ADMIN
-    sysctls:
-      - net.ipv6.conf.all.disable_ipv6=0
-      - net.ipv4.conf.all.src_valid_mark=1
-    volumes:
-      - ./data:/var/lib/cloudflare-warp
-      # - /dev/net/tun:/dev/net/tun
-```
+To run the WARP client in Docker, just edit `docker-compose.yml` and run `docker build -t scientificworld/warp . && docker compose up -d`.
 
 Try it out to see if it works:
 
 ```bash
 curl --socks5 127.0.0.1:1080 https://cloudflare.com/cdn-cgi/trace
+curl -x 127.0.0.1:443 https://cloudflare.com/cdn-cgi/trace
 ```
 
 If the output contains `warp=on` or `warp=plus`, the container is working properly. If the output contains `warp=off`, it means that the container failed to connect to the WARP service.
