@@ -11,6 +11,7 @@ services:
       - WARP_SLEEP=2
       # - WARP_LICENSE_KEY= # optional
       # - WARP_CUSTOM_ENDPOINT=162.159.192.8:2408
+      # - WARP_TUNNEL_PROTOCOL=WireGuard
       # - DO_NOT_CREATE_TUN_DEVICE=true
     cap_add:
       - NET_ADMIN

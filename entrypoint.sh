@@ -28,6 +28,11 @@ if [ -n "$WARP_CUSTOM_ENDPOINT" ]; then
     warp-cli tunnel endpoint set "$WARP_CUSTOM_ENDPOINT"
 fi
 
+# set tunnel protocol
+if [ -n "$WARP_TUNNEL_PROTOCOL" ]; then
+    warp-cli tunnel protocol set "$WARP_TUNNEL_PROTOCOL"
+fi
+
 # if /var/lib/cloudflare-warp/reg.json not exists, register the warp client
 if [ ! -f /var/lib/cloudflare-warp/reg.json ]; then
     warp-cli registration new && echo "Warp client registered!"
